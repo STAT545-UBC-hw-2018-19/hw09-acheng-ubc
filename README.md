@@ -8,3 +8,4 @@ This repository was initially seeded by a makefile pipeline by Jenny Bryan. I ha
 1. Modified the Rmd file with a summary of my own analyses
 1. Modified the Makefile to be able to reproduce all of the above
 
+The final report output from this analysis pipeline can be viewed right on GitHub [here](https://github.com/STAT545-UBC-students/hw09-acheng-ubc/blob/master/report.md), but it is recommened to download the [report.html](https://github.com/STAT545-UBC-students/hw09-acheng-ubc/blob/master/report.html) file for viewing instead.
