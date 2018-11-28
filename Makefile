@@ -1,20 +1,14 @@
 all: report.html
 
 clean:
-	rm -f words.txt histogram.tsv histogram.png report.md report.html
+	rm -f words.txt letters_count.tsv histogram_unsorted.png histogram_sorted.png report.md report.html
 
-report.html: report.rmd histogram.tsv histogram.png
+report.html: report.rmd letters_count.tsv histogram_unsorted.png histogram_sorted.png
 	Rscript -e 'rmarkdown::render("$<")'
 
-histogram.png: histogram.tsv
-	Rscript -e 'library(ggplot2); qplot(Length, Freq, data=read.delim("$<")); ggsave("$@")'
+letters_count.tsv histogram_unsorted.png histogram_sorted.png: count_letters.R words.txt
+	Rscript $<
 	rm Rplots.pdf
 
-histogram.tsv: histogram.r words.txt
-	Rscript $<
-
-words.txt: /usr/share/dict/words
-	cp $< $@
-
-# words.txt:
-#	Rscript -e 'download.file("http://svnweb.freebsd.org/base/head/share/dict/web2?view=co", destfile = "words.txt", quiet = TRUE)'
+words.txt:
+	Rscript -e 'download.file("http://svnweb.freebsd.org/base/head/share/dict/web2?view=co", destfile = "words.txt", quiet = TRUE)'

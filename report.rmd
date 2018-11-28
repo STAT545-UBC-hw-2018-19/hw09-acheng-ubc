@@ -1,22 +1,42 @@
 ---
-title: "English Word lengths"
-author: "Jenny Bryan"
+title: "Frequency of letters in the English Language"
+author: "Alex Cheng"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
     keep_md: yes
 ---
 
-```{r load-hist-dat, include = FALSE}
-hist_dat <- read.delim("histogram.tsv")
+```{r load depencies, include = FALSE}
+library(kableExtra)
+letters_count <- read.delim("letters_count.tsv")
 ```
 
-On most *nix systems, the file `/usr/share/dict/words` contains a bunch of words. On my machine, it contains `r sum(hist_dat$Freq)` words.
+For this exercise, I downloaded a database of words in the english langauge from [FreeBSD](http://svnweb.freebsd.org/base/head/share/dict/web2?view=co").
 
-I computed the length of each word, i.e. the number of characters, and tabulated how many words consist of 1 character, 2 characters, etc.
+I was curious which letters were more frequently used in the English language, so I computed the number of occurrences of each individual letter and tabulated the results below (Table 1).
 
-The most frequent word length is `r with(hist_dat, Length[which.max(Freq)])`.
+```{r}
+letters_count %>%
+  kable("html") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  column_spec(2, width = "15em") %>%
+  row_spec(5, bold = T, background = "yellow")
+```
+**Table 1** Number of occurrences of each letter.
 
-Here is a histogram of word lengths.
 
-![*Fig. 1* A histogram of English word lengths](histogram.png)
+The most frequently used letter was **E**. 
+
+Figure 1 below is a bar plot of the frequency of letters in the English language in alphabetical order.
+
+
+![**Figure 1** Frequency of letters found in the English Language. Red indicates the most frequently used letter.](histogram_unsorted.png)
+
+
+
+Figure 2 sorts the above bar plot in descending order of frequency.
+
+
+![**Figure 2** Frequency of letters found in the English Language in Descending order](histogram_sorted.png)
+
